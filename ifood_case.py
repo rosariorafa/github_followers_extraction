@@ -50,7 +50,7 @@ def main():
   fixed_company_users_df = valid_responses_users_df.withColumn("company",regexp_replace("company", r'^(\@)\d*',''))
 
   formated_date_users_df = fixed_company_users_df\
-  .withColumn("created_at", to_date( ("created_at", "yyyy-MM-dd'T'HH:mm:ss'Z'"))) \
+  .withColumn("created_at", to_date( col("created_at"), "yyyy-MM-dd'T'HH:mm:ss'Z'")) \
   .withColumn("created_at", date_format("created_at", "dd/MM/yyyy"))
 
   formated_date_users_df.write.options(header = 'True', delimiter=',') \
